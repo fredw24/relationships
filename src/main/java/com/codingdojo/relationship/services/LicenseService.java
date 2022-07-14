@@ -3,9 +3,12 @@ package com.codingdojo.relationship.services;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.stereotype.Service;
+
 import com.codingdojo.relationship.models.License;
 import com.codingdojo.relationship.repositories.LicenseRepository;
 
+@Service
 public class LicenseService {
 	private final LicenseRepository licenseRepository;
 	

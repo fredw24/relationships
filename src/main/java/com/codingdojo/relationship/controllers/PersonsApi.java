@@ -15,24 +15,27 @@ import com.codingdojo.relationship.services.PersonService;
 public class PersonsApi {
 
 	private final PersonService personService;
-    public PersonsApi(PersonService personService){
-        this.personService = personService;
-    }
-    @RequestMapping("/api/persons")
-    public List<Person> index() {
-        return personService.allPersons();
-    }
-    
-    @RequestMapping(value="/api/persons", method=RequestMethod.POST)
-    public Person create(@RequestParam(value="firstName") String firstName, @RequestParam(value="lastName") String lastName) {
-        Person person = new Person(firstName, lastName);
-        return personService.createPerson(person);
-    }
-    
-    @RequestMapping("/api/persons/{id}")
-    public Person show(@PathVariable("id") Long id) {
-        Person person = personService.findPerson(id);
-        return person;
-    }
-	
+
+	public PersonsApi(PersonService personService) {
+		this.personService = personService;
+	}
+
+	@RequestMapping("/api/persons")
+	public List<Person> index() {
+		return personService.allPersons();
+	}
+
+	@RequestMapping(value = "/api/persons", method = RequestMethod.POST)
+	public Person create(@RequestParam(value = "firstName") String firstName,
+			@RequestParam(value = "lastName") String lastName) {
+		Person person = new Person(firstName, lastName);
+		return personService.createPerson(person);
+	}
+
+	@RequestMapping("/api/persons/{id}")
+	public Person show(@PathVariable("id") Long id) {
+		Person person = personService.findPerson(id);
+		return person;
+	}
+
 }

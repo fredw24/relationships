@@ -3,6 +3,7 @@ package com.codingdojo.relationship.controllers;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -29,7 +30,7 @@ public class LicensesApi {
     }
     
     @RequestMapping(value="/api/licenses", method=RequestMethod.POST)
-    public License create(@RequestParam(value="expirationDate") Date expire, @RequestParam(value="state") String state, @RequestParam(value="id") Long id) {
+    public License create(@RequestParam(value="expirationDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date expire, @RequestParam(value="state") String state, @RequestParam(value="id") Long id) {
         
     	Person person = personService.findPerson(id);
     	int currentNumber = licenseService.allLicenses().size()+1;

@@ -1,5 +1,6 @@
 package com.codingdojo.relationship.models;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -13,38 +14,35 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.codingdojo.relationship.repositories.PersonRepository;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-@Table(name="licenses")
+@Table(name = "licenses")
 public class License {
 	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private String number;
-    private Date expirationDate;
-    private String state;
-    @Column(updatable=false)
-    private Date createdAt;
-    private Date updatedAt;
-    @OneToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="person_id")
-    private Person person;
-    
-    
-    public License() {
-        
-    }
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+	private String number;
+	private Date expirationDate;
+	private String state;
+	@Column(updatable = false)
+	private Date createdAt;
+	private Date updatedAt;
+	@OneToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "person_id")
+	@JsonIgnore
+	private Person person;
 
-    
-    
+	public License() {
+
+	}
+
 	public License(String number, Date expirationDate, String state, Person person) {
 		this.number = number;
 		this.expirationDate = expirationDate;
 		this.state = state;
 		this.person = person;
 	}
-
-
 
 	public Long getId() {
 		return id;
@@ -101,7 +99,5 @@ public class License {
 	public void setPerson(Person person) {
 		this.person = person;
 	}
-    
-    
-	
+
 }
