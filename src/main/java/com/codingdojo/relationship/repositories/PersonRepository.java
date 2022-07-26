@@ -12,6 +12,8 @@ public interface PersonRepository extends CrudRepository<Person, Long> {
 
 	List<Person> findAll();
 	
+	List<Person> findByLicense(String search);
+	
 	
 	
 }

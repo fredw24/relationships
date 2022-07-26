@@ -34,4 +34,9 @@ public class LicenseService {
 			return null;
 		}
 	}
+	
+	public Long countLicense() {
+		
+		return licenseRepository.count();
+	}
 }

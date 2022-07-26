@@ -20,6 +20,10 @@ public class PersonService {
         return personRepository.findAll();
     }
 	
+	public List<Person> allPersonsNull(){
+		return personRepository.findByLicense(null);
+	}
+	
 	public Person createPerson(Person p) {
 		return personRepository.save(p);
 		
