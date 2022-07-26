@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -37,14 +38,25 @@ public class LicensesController {
 	
 	@RequestMapping(value="/licenses", method=RequestMethod.POST)
 	public String create(@Valid @ModelAttribute("license") License license, BindingResult result, Model model) {
-		System.out.print(license.getPerson().getFirstName());
 		if (result.hasErrors()) {
 			List<Person> nullPeople = personService.allPersonsNull();
 			model.addAttribute("people", nullPeople);
             return "/licenses/new.jsp";
         } else {
-        	Long count = licenseService.countLicense();
+        	Long count = licenseService.countLicense() + 1;
         	System.out.println(count);
+        	
+        	String number = count.toString();
+        	if (number.length() < 5) {
+        		
+        		while (number.length() < 5) {
+        			number = "0" + number;
+        		}
+        		
+        	}
+        	license.setNumber(number);
+        	
+        	licenseService.createLicense(license);
         	
             
             return "redirect:/persons";

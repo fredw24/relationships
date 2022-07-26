@@ -13,6 +13,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import com.codingdojo.relationship.repositories.PersonRepository;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -23,6 +25,7 @@ public class License {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String number;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date expirationDate;
 	private String state;
 	@Column(updatable = false)
